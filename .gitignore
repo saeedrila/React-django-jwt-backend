@@ -2,3 +2,6 @@
 
 # settings
 backend/settings.py
+
+#media files
+media/
