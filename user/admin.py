@@ -11,22 +11,22 @@ class UserAdminConfig(UserAdmin):
     search_fields = ('email', 'username', 'first_name',)
     list_filter = ('email', 'username', 'phone', 'is_active', 'is_staff')
     ordering = ('-start_date',)
-    list_display = ('email','id','username', 'phone',
-                    'is_active', 'is_staff')
+    list_display = ('email','id','username', 'phone', 'is_active', 'is_staff')
     fieldsets = (
         (None, {'fields': ('email', 'username', 'phone',)}),
         ('Permissions', {'fields': ('is_staff', 'is_active')}),
         ('Personal', {'fields': ('about',)}),
     )
+
     formfield_overrides = {
         models.TextField: {'widget': Textarea(attrs={'rows': 20, 'cols': 60})},
     }
+
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
             'fields': ('email', 'username', 'phone', 'password1', 'is_active', 'is_staff')}
-         ),
+        ),
     )
-
 
 admin.site.register(NewUser, UserAdminConfig)

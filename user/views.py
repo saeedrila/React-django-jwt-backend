@@ -9,6 +9,7 @@ from rest_framework.permissions import AllowAny
 from rest_framework.permissions import IsAuthenticated
 from django.contrib.auth import authenticate,login,logout
 
+
 class CheckAuthView(APIView):
     permission_classes = [IsAuthenticated]
 
@@ -34,7 +35,6 @@ class CustomUserCreate(APIView):
             else:
                 return Response(reg_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         return Response(reg_serializer.errors,status=status.HTTP_400_BAD_REQUEST)
-    
 
 
 class UserLoginView(TokenObtainPairView):
@@ -55,8 +55,6 @@ class UserLoginView(TokenObtainPairView):
                 return Response({'errors': {'non_field_errors': ['Email or password is not valid']}}, status=status.HTTP_404_NOT_FOUND)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    
-
 
 class AdminLoginView(TokenObtainPairView):
     permission_classes = [AllowAny]
@@ -70,7 +68,6 @@ class AdminLoginView(TokenObtainPairView):
             return Response({'token': token, 'user_id': user.pk}, status=status.HTTP_200_OK)
         else:
             return Response({'error': 'Invalid Credentials'}, status=status.HTTP_401_UNAUTHORIZED)
-    
 
 
 class LogoutView(APIView):
@@ -79,7 +76,6 @@ class LogoutView(APIView):
     def post(self, request):
         logout(request)
         return Response({"message": "Successfully logged out."}, status=status.HTTP_200_OK)
-    
 
 
 class UserListAPIView(APIView):
@@ -143,8 +139,6 @@ class UserSearchApiView(APIView):
                 serializer = UserSerializer(user,many=True)
                 return Response(serializer.data)
         return Response(status=status.HTTP_404_NOT_FOUND)
-    
-
 
 
 class UserProfileView(APIView):
@@ -169,4 +163,3 @@ class UserProfileView(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-

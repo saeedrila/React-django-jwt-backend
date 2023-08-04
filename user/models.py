@@ -11,7 +11,6 @@ class CustomAccountManager(BaseUserManager):
         other.setdefault("is_superuser",True)
         other.setdefault("is_active",True)
 
-
         if other.get("is_staff") is not True:
             raise ValueError(
                 'superuser must be assigned to is_staff = True'
