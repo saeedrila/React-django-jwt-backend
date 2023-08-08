@@ -5,3 +5,6 @@ backend/settings.py
 
 #media files
 media/
+
+# Database
+db.sqlite3
